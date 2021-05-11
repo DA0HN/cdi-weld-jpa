@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  database:
+    container_name: cdi-weld-database
+    image: cdi-weld-database
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cdi_weld_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
+    volumes:
+      - cdi-weld-volume:/var/lib/mysql
+    restart: on-failure
+    networks:
+      - db-network
+networks:
+  db-network:
+    driver: bridge
+volumes:
+  cdi-weld-volume:
+    external: true
