@@ -1,8 +1,8 @@
 version: '3.8'
 services:
   database:
+    image: mysql:5.7
     container_name: cdi-weld-database
-    image: cdi-weld-database
     ports:
       - '3306:3306'
     environment:
@@ -10,14 +10,12 @@ services:
       MYSQL_DATABASE: cdi_weld_db
       MYSQL_USER: user
       MYSQL_PASSWORD: root
+    #https://iamvickyav.medium.com/mysql-init-script-on-docker-compose-e53677102e48
     volumes:
-      - cdi-weld-volume:/var/lib/mysql
+      - ./script/init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: on-failure
     networks:
       - db-network
 networks:
   db-network:
     driver: bridge
-volumes:
-  cdi-weld-volume:
-    external: true
