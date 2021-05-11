@@ -1,11 +1,15 @@
 package br.com.gabriel.models;
 
+import br.com.gabriel.service.ToStringFormatterService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.inject.Inject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -24,6 +28,10 @@ public class User implements Serializable {
   private UUID id;
   private String name;
   private String email;
+
+  @Inject
+  @Transient
+  private ToStringFormatterService formatterService;
 
   public User() {
   }
@@ -55,5 +63,23 @@ public class User implements Serializable {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public ToStringFormatterService getFormatterService() {
+    return formatterService;
+  }
+
+  public void setFormatterService(ToStringFormatterService formatterService) {
+    this.formatterService = formatterService;
+  }
+
+  @Override public String toString() {
+    try {
+      return this.formatterService.format(this);
+    }
+    catch(JsonProcessingException e) {
+      e.printStackTrace();
+    }
+    return "Não foi possível formatar o objeto 'User'.";
   }
 }
