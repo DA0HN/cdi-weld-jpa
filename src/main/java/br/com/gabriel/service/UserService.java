@@ -4,7 +4,9 @@ import br.com.gabriel.config.annotations.InputReader;
 import br.com.gabriel.models.User;
 import br.com.gabriel.repositories.UserRepository;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
