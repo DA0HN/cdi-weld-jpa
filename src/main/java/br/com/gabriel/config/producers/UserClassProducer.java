@@ -1,5 +1,6 @@
 package br.com.gabriel.config.producers;
 
+import br.com.gabriel.config.annotations.UserClass;
 import br.com.gabriel.models.User;
 
 import javax.enterprise.inject.Produces;
@@ -12,9 +13,9 @@ import javax.enterprise.inject.Produces;
 public class UserClassProducer {
 
   @Produces
+  @UserClass
   public Class<User> createUserClass() {
     return User.class;
   }
-
 
 }
