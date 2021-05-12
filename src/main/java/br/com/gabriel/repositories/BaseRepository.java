@@ -60,7 +60,11 @@ public abstract class BaseRepository<T> implements Repository<T> {
   }
 
   @Override public List<T> findByName(String name) {
-    return null;
+    var selectQuery = "SELECT user FROM table user WHERE upper(user.name) LIKE :name";
+    var formattedQuery = selectQuery.replace("table", getTableName());
+    var query = manager.createQuery(formattedQuery, entityClass);
+    query.setParameter("name","%" + name.trim().toUpperCase() + "%");
+    return query.getResultList();
   }
 
   private void beginTransaction() {
