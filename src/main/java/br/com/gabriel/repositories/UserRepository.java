@@ -1,7 +1,9 @@
 package br.com.gabriel.repositories;
 
+import br.com.gabriel.config.annotations.UserClass;
 import br.com.gabriel.models.User;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 /**
@@ -11,7 +13,9 @@ import javax.persistence.EntityManager;
  */
 public class UserRepository extends BaseRepository<User> {
 
-  public UserRepository(EntityManager manager, Class<User> entityClass) {
+  @Inject
+  public UserRepository(EntityManager manager,
+                        @UserClass Class<User> entityClass) {
     super(manager, entityClass);
   }
 
