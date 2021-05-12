@@ -1,5 +1,6 @@
 package br.com.gabriel.repositories;
 
+import br.com.gabriel.config.annotations.MySQLDatabase;
 import br.com.gabriel.config.annotations.UserClass;
 import br.com.gabriel.models.User;
 
@@ -14,7 +15,7 @@ import javax.persistence.EntityManager;
 public class UserRepository extends BaseRepository<User> {
 
   @Inject
-  public UserRepository(EntityManager manager,
+  public UserRepository(@MySQLDatabase EntityManager manager,
                         @UserClass Class<User> entityClass) {
     super(manager, entityClass);
   }
