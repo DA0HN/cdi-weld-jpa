@@ -18,6 +18,7 @@ import java.util.UUID;
  * @since 11/05/2021
  */
 @Entity
+@Table(name = "user")
 public class User implements Serializable {
   // https://phauer.com/2016/uuids-hibernate-mysql/
   @Id

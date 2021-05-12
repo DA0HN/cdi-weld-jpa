@@ -21,6 +21,6 @@ public class UserRepository extends BaseRepository<User> {
   }
 
   @Override public String getTableName() {
-    return "User";
+    return "user";
   }
 }
