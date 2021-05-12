@@ -1,9 +1,5 @@
 package br.com.gabriel.repositories;
 
-import br.com.gabriel.config.annotations.MySQLDatabase;
-import br.com.gabriel.config.annotations.UserClass;
-
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
@@ -70,7 +66,8 @@ public abstract class BaseRepository<T> implements Repository<T> {
   private void beginTransaction() {
     try {
       manager.getTransaction().begin();
-    } catch (IllegalStateException exception) {
+    }
+    catch(IllegalStateException exception) {
       rollBackTransaction();
     }
   }
@@ -78,7 +75,8 @@ public abstract class BaseRepository<T> implements Repository<T> {
   private void commitTransaction() {
     try {
       manager.getTransaction().commit();
-    } catch (IllegalStateException | RollbackException exception) {
+    }
+    catch(IllegalStateException | RollbackException exception) {
       rollBackTransaction();
     }
   }
@@ -86,7 +84,8 @@ public abstract class BaseRepository<T> implements Repository<T> {
   private void rollBackTransaction() {
     try {
       manager.getTransaction().rollback();
-    } catch (IllegalStateException | PersistenceException exception) {
+    }
+    catch(IllegalStateException | PersistenceException exception) {
       exception.printStackTrace();
     }
   }
